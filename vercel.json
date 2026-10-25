@@ -1,5 +1,6 @@
 {
   "rewrites": [
-    { "source": "/tmdb/:path*", "destination": "/api/tmdb?path=:path*" }
+    { "source": "/tmdb/:path*", "destination": "/api/tmdb?path=:path*" },
+    { "source": "/omdb", "destination": "/api/omdb" }
   ]
 }

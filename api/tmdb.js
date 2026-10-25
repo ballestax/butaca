@@ -2,8 +2,13 @@
 // El navegador llama /tmdb/movie/popular?page=1 y la key se añade aquí.
 // Requiere la variable de entorno TMDB_API_KEY en el panel del proveedor.
 
+import { authenticate } from './_auth.js'
+
 export default async function handler(req, res) {
-  const key = process.env.TMDB_API_KEY
+  const auth = await authenticate(req)
+  if (!auth.ok) return res.status(auth.status).json({ error: auth.error })
+
+  const key = process.env.TMDB_API_KEY?.trim()
   if (!key) return res.status(500).json({ error: 'Falta TMDB_API_KEY' })
 
   const url = new URL(req.url, 'http://local')
